@@ -9,12 +9,22 @@ import org.hibernate.cfg.Configuration;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Student s1 = new Student();
+        fetchStudentDataByRollNumber(7);
+    }
 
-        s1.setSid(9);
-        s1.setName("Sagarika");
-        s1.setMarks(31);
+    static void fetchStudentDataByRollNumber(int rollNumber) {
+        SessionFactory sessionFactory = new Configuration()
+                .addAnnotatedClass(Student.class)
+                .configure()
+                .buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        Student student = session.get(Student.class, rollNumber);
+        System.out.println(student);
+        session.close();
+        sessionFactory.close();
+    }
 
+    static void addNewStudentData(Student student) {
         SessionFactory sessionFactory = new Configuration()
                 .addAnnotatedClass(Student.class)
                 .configure()
@@ -22,10 +32,10 @@ public class Main {
         Session session = sessionFactory.openSession();
 
         Transaction transaction = session.beginTransaction();
-        session.persist(s1);
+        session.persist(student);
         transaction.commit();
 
-        System.out.println(s1);
+        System.out.println(student);
 
         session.close();
         sessionFactory.close();
