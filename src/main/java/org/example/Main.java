@@ -11,9 +11,9 @@ public class Main {
     public static void main(String[] args) {
         Student s1 = new Student();
 
-        s1.setSid(6);
-        s1.setName("Harsh");
-        s1.setMarks(14);
+        s1.setSid(8);
+        s1.setName("Sagar");
+        s1.setMarks(27);
 
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Student.class);

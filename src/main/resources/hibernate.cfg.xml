@@ -29,5 +29,19 @@
          -->
             update
         </property>
+        
+        <property name="hibernate.show_sql">
+            true <!-- set to true if we want to see what query hibernate is using internally. -->
+        </property>
+        
+        <property name="hibernate.format_sql">
+             true <!-- set to true if we want to see the query in a formatted way. -->
+        </property>
+
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.PostgreSQLDialect
+            <!-- Hibernate uses "dialect" configuration to know which database
+            you are using so that it can switch to the database specific SQL generator code -->
+        </property>
     </session-factory>
 </hibernate-configuration>
