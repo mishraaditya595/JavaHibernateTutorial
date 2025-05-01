@@ -16,7 +16,14 @@ public class Main {
 //        addNewStudentData(student);
 //        fetchStudentDataByRollNumber(7);
 //        updateStudentData(student);
-        deleteStudentData(8);
+//        deleteStudentData(8);
+//        fetchAlienDataByRollNumber(7);
+
+        Alien alien = new Alien();
+        alien.setId(1);
+        alien.setName("Raju");
+        alien.setTech(12);
+        addNewAlienData(alien);
     }
 
     private static void deleteStudentData(int rollNum) {
@@ -62,6 +69,20 @@ public class Main {
         sessionFactory.close();
     }
 
+    static void fetchAlienDataByRollNumber(int rollNumber) {
+        SessionFactory sessionFactory = new Configuration()
+                .addAnnotatedClass(Alien.class)
+                .configure()
+                .buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        Alien alien = session.get(Alien.class, rollNumber);
+        System.out.println(alien);
+        session.close();
+        sessionFactory.close();
+    }
+
+
+
     static void addNewStudentData(Student student) {
         SessionFactory sessionFactory = new Configuration()
                 .addAnnotatedClass(Student.class)
@@ -74,6 +95,23 @@ public class Main {
         transaction.commit();
 
         System.out.println(student);
+
+        session.close();
+        sessionFactory.close();
+    }
+
+    static void addNewAlienData(Alien alien) {
+        SessionFactory sessionFactory = new Configuration()
+                .addAnnotatedClass(Alien.class)
+                .configure()
+                .buildSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        Transaction transaction = session.beginTransaction();
+        session.persist(alien);
+        transaction.commit();
+
+        System.out.println(alien);
 
         session.close();
         sessionFactory.close();
