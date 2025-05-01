@@ -9,8 +9,46 @@ import org.hibernate.cfg.Configuration;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        fetchStudentDataByRollNumber(7);
+//        Student student = new Student();
+//        student.setName("Harsh");
+//        student.setSid(3);
+//        student.setMarks(22);
+//        addNewStudentData(student);
+//        fetchStudentDataByRollNumber(7);
+//        updateStudentData(student);
+        deleteStudentData(8);
     }
+
+    private static void deleteStudentData(int rollNum) {
+        SessionFactory sessionFactory = new Configuration()
+                .addAnnotatedClass(Student.class)
+                .configure()
+                .buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        Student studentToDelete = session.get(Student.class, rollNum);
+        Transaction transaction = session.beginTransaction();
+        session.remove(studentToDelete); //checks if the data is already present, if yes, it updates else it inserts
+        transaction.commit();
+        session.close();
+        sessionFactory.close();
+    }
+
+    private static void updateStudentData(Student student) {
+        SessionFactory sessionFactory = new Configuration()
+                .addAnnotatedClass(Student.class)
+                .configure()
+                .buildSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        Transaction transaction = session.beginTransaction();
+        session.merge(student); //checks if the data is already present, if yes, it updates else it inserts
+        transaction.commit();
+
+        System.out.println(student);
+        session.close();
+        sessionFactory.close();
+    }
+
 
     static void fetchStudentDataByRollNumber(int rollNumber) {
         SessionFactory sessionFactory = new Configuration()
