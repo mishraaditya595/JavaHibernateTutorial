@@ -19,11 +19,18 @@ public class Main {
 //        deleteStudentData(8);
 //        fetchAlienDataByRollNumber(7);
 
-        Alien alien = new Alien();
-        alien.setId(1);
-        alien.setName("Raju");
-        alien.setTech(12);
-        addNewAlienData(alien);
+//        Laptop laptop = new Laptop();
+//        laptop.setBrand("Asus");
+//        laptop.setModel("ROG");
+//        laptop.setRam(16);
+//
+//        Alien alien = new Alien();
+//        alien.setId(1);
+//        alien.setName("Raju");
+//        alien.setTech("Java");
+//        alien.setLaptop(laptop);
+//        addNewAlienData(alien);
+        fetchAlienDataByRollNumber(1);
     }
 
     private static void deleteStudentData(int rollNum) {
